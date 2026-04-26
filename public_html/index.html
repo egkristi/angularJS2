@@ -6,7 +6,6 @@
         <script type="text/javascript" src="js/angular.min.js"></script>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-        <!-- API Key 3d2ed34ca956482e7dcf7bad53950175 -->
         <!-- INCLUDE APPLICATION SPECIFIC CSS AND JAVASCRIPT -->
         <script type="text/javascript" src="js/tv-premieres-app/app.js"></script>
         <script type="text/javascript" src="js/tv-premieres-app/controllers/mainController.js"></script>
@@ -44,7 +43,7 @@
                         <div class="row-fluid">
                             <div class="span3">
                                 <img src="{{tvshow.episode.images.screen}}" />
-                                <div class="ratings"><strong>Ratings:</strong> <span class="label"><i class="icon-thumbs-up"></i> {{tvshow.episode.ratings.loved}}</span> <span class="label"><i class="icon-thumbs-down"></i> {{tvshow.episode.ratings.hated}}</span> <span class="label label-important" ng-class="{'label-success': tvshow.episode.ratings.percentage >= 50}"><strong>%</strong> {{tvshow.episode.ratings.percentage}}</div>
+                                <div class="ratings"><strong>Ratings:</strong> <span class="label"><i class="icon-thumbs-up"></i> {{tvshow.episode.ratings.loved}}</span> <span class="label"><i class="icon-thumbs-down"></i> {{tvshow.episode.ratings.hated}}</span> <span class="label label-important" ng-class="{'label-success': tvshow.episode.ratings.percentage >= 50}"><strong>%</strong> {{tvshow.episode.ratings.percentage}}</span></div>
                             </div>
                             <div class="span6">
                                 <h3>{{tvshow.show.title}}: {{tvshow.episode.title}}</h3>
