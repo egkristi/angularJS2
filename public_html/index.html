@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="container main-frame" ng-controller="mainController">
-            <div class="search-box">
+            <div class="search-box" ng-hide="loading">
                 <div class="form-inline">
                     <label>Filter:</label>
                     <input type="text" class="form-control" ng-model="filterText" placeholder="Search shows...">
@@ -31,21 +31,34 @@
                     <select class="form-control" ng-model="orderReverse" ng-options="o.value as o.label for o in [{value: false, label: 'Ascending'}, {value: true, label: 'Descending'}]"></select>
                 </div>
             </div>
-            <div class="results-container">
+            <div class="loading-state" ng-show="loading">
+                <p><span class="glyphicon glyphicon-refresh spinning"></span> Loading TV schedule from TVmaze...</p>
+            </div>
+            <div class="error-state" ng-show="error">
+                <p><span class="glyphicon glyphicon-exclamation-sign"></span> {{error}}</p>
+            </div>
+            <div class="results-container" ng-hide="loading">
+                <p class="result-count" ng-show="results.length > 0">
+                    Showing {{(results | filter:filterText | isGenre:genreFilter).length}} of {{results.length}} shows
+                    <span ng-show="genreFilter"> in <strong>{{genreFilter}}</strong></span>
+                </p>
                 <ul class="episode-list">
                     <li ng-repeat="tvshow in results | filter:filterText | isGenre:genreFilter | orderBy:customOrder:orderReverse">
                         <div class="row">
                             <div class="col-sm-3">
                                 <img ng-src="{{tvshow.episode.images.screen}}" alt="{{tvshow.show.title}}">
                                 <div class="ratings">
-                                    <strong>Ratings:</strong>
-                                    <span class="label label-default"><span class="glyphicon glyphicon-thumbs-up"></span> {{tvshow.episode.ratings.loved}}</span>
-                                    <span class="label label-default"><span class="glyphicon glyphicon-thumbs-down"></span> {{tvshow.episode.ratings.hated}}</span>
-                                    <span class="label" ng-class="tvshow.episode.ratings.percentage >= 50 ? 'label-success' : 'label-danger'"><strong>%</strong> {{tvshow.episode.ratings.percentage}}</span>
+                                    <span class="label" ng-class="tvshow.episode.ratings.average >= 7 ? 'label-success' : (tvshow.episode.ratings.average >= 5 ? 'label-warning' : 'label-danger')" ng-show="tvshow.episode.ratings.average > 0">
+                                        <span class="glyphicon glyphicon-star"></span> {{tvshow.episode.ratings.average}}/10
+                                    </span>
+                                    <span class="label label-default" ng-show="tvshow.episode.ratings.average === 0">
+                                        Not rated
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <h3>{{tvshow.show.title}}: {{tvshow.episode.title}}</h3>
+                                <span class="label label-primary episode-badge" ng-show="tvshow.episode.number">S{{tvshow.episode.season}}E{{tvshow.episode.number}}</span>
                                 <p>{{tvshow.episode.overview}}</p>
                             </div>
                             <div class="col-sm-3">
@@ -60,7 +73,7 @@
                         </div>
                     </li>
                 </ul>
-                <div class="no-results" ng-show="(results | filter:filterText | isGenre:genreFilter).length === 0">
+                <div class="no-results" ng-show="results.length > 0 && (results | filter:filterText | isGenre:genreFilter).length === 0">
                     No shows match your filters.
                 </div>
             </div>

@@ -1,22 +1,28 @@
 # TV Show Premieres
 
-AngularJS-app som viser TV-premièrer med filtrering, sortering og genre-valg.
+AngularJS-app som viser ekte TV-premièrer fra TVmaze API med filtrering, sortering og genre-valg.
 
 ## Features
 
+- **Live data** – henter dagens + 2 neste dagers TV-premierer fra TVmaze API
 - **Tekstfilter** – fritekst-søk på tvers av titler, episoder og datoer
 - **Genre-filter** – dropdown eller klikk på genre-tags for rask filtrering
 - **Sortering** – etter luftdato eller rating, stigende/synkende
-- **Ratings** – thumbs up/down og prosentvis score med fargekoding
+- **Ratings** – TVmaze rating med fargekoding (grønn/gul/rød)
 - **Responsivt** – tilpasser seg mobil, nettbrett og desktop
-- **Ingen resultater**-melding ved tomme filter
+- **Loading/error states** – spinner ved lasting, feilmelding ved problemer
+
+## API
+
+Bruker [TVmaze API](https://www.tvmaze.com/api) (gratis, ingen nøkkel, CORS-støtte):
+- `GET /schedule?country=US&date=YYYY-MM-DD`
 
 ## Tech Stack
 
 - AngularJS 1.8.3
 - Bootstrap 3.4.1
+- TVmaze REST API
 - Custom `isGenre` filter
-- Inline dependency injection (minification-safe)
 
 ## Kjøre
 
@@ -26,15 +32,15 @@ AngularJS-app som viser TV-premièrer med filtrering, sortering og genre-valg.
 
 ```
 public_html/
-├── index.html                  # Hovedside
+├── index.html
 ├── css/
-│   ├── bootstrap.min.css       # Bootstrap 3.4.1
-│   └── main.css                # App-spesifikk styling
+│   ├── bootstrap.min.css
+│   └── main.css
 └── js/
-    ├── angular.min.js           # AngularJS 1.8.3
+    ├── angular.min.js
     └── tv-premieres-app/
-        ├── app.js               # Modul-definisjon
+        ├── app.js
         └── controllers/
-            ├── mainController.js # Hovedcontroller med sample-data
-            └── filters.js        # Custom isGenre-filter
+            ├── mainController.js
+            └── filters.js
 ```
