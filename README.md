@@ -1,20 +1,40 @@
-# TV Show Premieres – AngularJS 2
+# TV Show Premieres
 
-En AngularJS 1.x app som viser TV-premièrer med filtrering, sortering og genre-valg.
+AngularJS-app som viser TV-premièrer med filtrering, sortering og genre-valg.
 
 ## Features
 
-- **Tekstfilter** – søk på tvers av show-titler, episoder og datoer
-- **Genre-filter** – velg genre fra dropdown eller klikk på genre-tags
+- **Tekstfilter** – fritekst-søk på tvers av titler, episoder og datoer
+- **Genre-filter** – dropdown eller klikk på genre-tags for rask filtrering
 - **Sortering** – etter luftdato eller rating, stigende/synkende
-- **Ratings** – viser loved/hated/prosent med fargekoding
+- **Ratings** – thumbs up/down og prosentvis score med fargekoding
+- **Responsivt** – tilpasser seg mobil, nettbrett og desktop
+- **Ingen resultater**-melding ved tomme filter
 
-## Tech
+## Tech Stack
 
-- AngularJS 1.x
-- Bootstrap 2.x (responsive)
-- Custom filter (`isGenre`)
+- AngularJS 1.8.3
+- Bootstrap 3.4.1
+- Custom `isGenre` filter
+- Inline dependency injection (minification-safe)
 
 ## Kjøre
 
 Åpne `public_html/index.html` direkte i en nettleser.
+
+## Prosjektstruktur
+
+```
+public_html/
+├── index.html                  # Hovedside
+├── css/
+│   ├── bootstrap.min.css       # Bootstrap 3.4.1
+│   └── main.css                # App-spesifikk styling
+└── js/
+    ├── angular.min.js           # AngularJS 1.8.3
+    └── tv-premieres-app/
+        ├── app.js               # Modul-definisjon
+        └── controllers/
+            ├── mainController.js # Hovedcontroller med sample-data
+            └── filters.js        # Custom isGenre-filter
+```
